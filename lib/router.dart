@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_sandwich/data/model/cart.dart';
 import 'package:go_sandwich/data/model/product.dart';
 import 'package:go_sandwich/pages/cart/cart_page.dart';
+import 'package:go_sandwich/pages/checkout/checkout_page.dart';
+import 'package:go_sandwich/pages/checkout/checkout_success_page.dart';
 import 'package:go_sandwich/pages/detail_product/detail_product_page.dart';
 import 'package:go_sandwich/pages/home/home_page.dart';
 import 'package:go_sandwich/pages/login/login_page.dart';
+import 'package:go_sandwich/pages/profile/profile_page.dart';
 import 'package:go_sandwich/pages/register/register_page.dart';
 import 'package:go_sandwich/pages/search/search_page.dart';
+import 'package:go_sandwich/pages/stock/stock_page.dart';
 import 'package:go_sandwich/utils/navigation.dart';
 import 'package:go_sandwich/widgets/bottom_nav.dart';
 
@@ -38,56 +43,101 @@ final router = GoRouter(
       },
     ),
     ShellRoute(
-        navigatorKey: userNavigatorKey,
-        builder: (context, state, child) {
-          return BottomNav(child: child);
-        },
-        routes: [
-          GoRoute(
-            name: HomePage.routeName,
-            path: HomePage.routeName,
-            pageBuilder: (context, state) {
-              return buildCustomTransitionPage(
-                state: state,
-                context: context,
-                child: const HomePage(),
-              );
-            },
-          ),
-          GoRoute(
-            name: SearchPage.routeName,
-            path: SearchPage.routeName,
-            pageBuilder: (context, state) {
-              return buildCustomTransitionPage(
-                state: state,
-                context: context,
-                child: const SearchPage(),
-              );
-            },
-          ),
-          GoRoute(
-            name: CartPage.routeName,
-            path: CartPage.routeName,
-            pageBuilder: (context, state) {
-              return buildCustomTransitionPage(
-                state: state,
-                context: context,
-                child: const CartPage(),
-              );
-            },
-          ),
-          GoRoute(
-            name: DetailProduct.routeName,
-            path: DetailProduct.routeName,
-            pageBuilder: (context, state) {
-              return buildCustomTransitionPage(
-                state: state,
-                context: context,
-                child: DetailProduct(product: state.extra as Product),
-              );
-            },
-          ),
-        ])
+      navigatorKey: userNavigatorKey,
+      builder: (context, state, child) {
+        return BottomNav(child: child);
+      },
+      routes: [
+        GoRoute(
+          name: HomePage.routeName,
+          path: HomePage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const HomePage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: SearchPage.routeName,
+          path: SearchPage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const SearchPage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: CartPage.routeName,
+          path: CartPage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const CartPage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: DetailProduct.routeName,
+          path: DetailProduct.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: DetailProduct(product: state.extra as Product),
+            );
+          },
+        ),
+        GoRoute(
+          name: CheckoutPage.routeName,
+          path: CheckoutPage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: CheckoutPage(selectedCart: state.extra as Cart),
+            );
+          },
+        ),
+        GoRoute(
+          name: CheckoutSuccessPage.routeName,
+          path: CheckoutSuccessPage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const CheckoutSuccessPage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: ProfilePage.routeName,
+          path: ProfilePage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const ProfilePage(),
+            );
+          },
+        ),
+        GoRoute(
+          name: StockPage.routeName,
+          path: StockPage.routeName,
+          pageBuilder: (context, state) {
+            return buildCustomTransitionPage(
+              state: state,
+              context: context,
+              child: const StockPage(),
+            );
+          },
+        ),
+      ],
+    ),
   ],
 );
 

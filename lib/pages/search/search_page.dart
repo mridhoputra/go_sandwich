@@ -32,7 +32,7 @@ class _SearchPageState extends State<SearchPage> {
           child: SingleChildScrollView(
             child: Container(
               height: MediaQuery.of(context).size.height,
-              padding: const EdgeInsets.fromLTRB(36, 36, 36, 78),
+              padding: const EdgeInsets.fromLTRB(36, 24, 36, 78),
               decoration: BoxDecoration(
                 color: ColorTheme.primary,
               ),

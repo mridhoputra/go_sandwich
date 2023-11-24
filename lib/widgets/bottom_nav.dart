@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:go_sandwich/pages/cart/cart_page.dart';
 import 'package:go_sandwich/pages/home/home_page.dart';
 import 'package:go_sandwich/pages/login/login_page.dart';
+import 'package:go_sandwich/pages/profile/profile_page.dart';
 import 'package:go_sandwich/pages/search/search_page.dart';
-import 'package:go_sandwich/utils/colors.dart';
 
 class BottomNav extends StatefulWidget {
   final Widget child;
@@ -33,7 +33,7 @@ class _BottomNavState extends State<BottomNav> {
       label: 'Cart',
     ),
     const ScaffoldWithNavBarTabItem(
-      initialLocation: LoginPage.routeName,
+      initialLocation: ProfilePage.routeName,
       icon: Icon(Icons.person),
       label: 'Profile',
     ),

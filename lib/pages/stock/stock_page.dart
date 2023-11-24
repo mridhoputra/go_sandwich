@@ -9,16 +9,17 @@ import 'package:go_sandwich/utils/colors.dart';
 import 'package:go_sandwich/utils/data_common.dart';
 import 'package:go_sandwich/utils/formatter.dart';
 import 'package:go_sandwich/widgets/card_cart.dart';
+import 'package:go_sandwich/widgets/card_stock.dart';
 
-class CartPage extends StatefulWidget {
-  static const routeName = '/cart';
-  const CartPage({super.key});
+class StockPage extends StatefulWidget {
+  static const routeName = '/profile-stock';
+  const StockPage({super.key});
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<StockPage> createState() => _StockPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _StockPageState extends State<StockPage> {
   Cart myCart = Cart(
     items: [
       Item(
@@ -54,7 +55,7 @@ class _CartPageState extends State<CartPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Text(
-                    'Keranjang Saya',
+                    'Stok Barang',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -70,71 +71,20 @@ class _CartPageState extends State<CartPage> {
                             itemCount: myCart.items?.length ?? 0,
                             itemBuilder: (context, index) {
                               return Container(
-                                margin: const EdgeInsets.only(bottom: 16, right: 12),
-                                child: CardCart(
+                                margin: const EdgeInsets.only(bottom: 16),
+                                child: CardStock(
                                   item: myCart.items![index],
-                                  onRemoveItem: () {
-                                    //TODO:
-                                  },
                                   onAddItem: () {
                                     //TODO:
                                   },
                                   onSubstractItem: () {
                                     //TODO:
                                   },
-                                  onSelect: (value) {
-                                    if (selectedCart.items?.any((item) =>
-                                            item.product?.name ==
-                                            myCart.items![index].product?.name) ??
-                                        false) {
-                                      if (value == false) {
-                                        setState(() {
-                                          selectedCart.items?.removeWhere((item) =>
-                                              item.product?.name ==
-                                              myCart.items![index].product?.name);
-                                          selectedCart.totalPrice = selectedCart.totalPrice -
-                                              (myCart.items![index].quantity *
-                                                  myCart.items![index].product!.price);
-                                        });
-                                      }
-                                    } else {
-                                      if (value == true) {
-                                        setState(() {
-                                          selectedCart.items?.add(myCart.items![index]);
-                                          selectedCart.totalPrice = selectedCart.totalPrice +
-                                              (myCart.items![index].quantity *
-                                                  myCart.items![index].product!.price);
-                                        });
-                                      }
-                                    }
-                                  },
-                                  selected: selectedCart.items?.any((item) =>
-                                          item.product?.name ==
-                                          myCart.items![index].product?.name) ??
-                                      false,
                                 ),
                               );
                             },
                           )
                         : const Text('Belum ada produk yang ditambahkan ke keranjang'),
-                  ),
-                  Row(
-                    children: [
-                      const Text(
-                        'Total: ',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        formatRupiah(selectedCart.totalPrice.toDouble()),
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
                   ),
                   const SizedBox(height: 8),
                   ElevatedButton(
@@ -156,7 +106,7 @@ class _CartPageState extends State<CartPage> {
                       ),
                     ),
                     child: const Text(
-                      'Checkout',
+                      'Update Stok Barang',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20,
