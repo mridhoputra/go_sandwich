@@ -1,7 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:go_sandwich/pages/home/home_page.dart';
+import 'package:go_sandwich/provider/main_provider.dart';
 import 'package:go_sandwich/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register';
@@ -27,201 +31,202 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Scaffold(
         backgroundColor: Colors.blueAccent,
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(color: ColorTheme.primary),
-                  height: MediaQuery.of(context).size.height,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Spacer(),
-                      Image.asset(
-                        'assets/images/il_register.png',
-                        height: MediaQuery.of(context).size.height * 0.4,
-                      ),
-                      const Spacer(),
-                      TextField(
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorTheme.secondary,
-                          labelStyle: const TextStyle(height: 1, color: Colors.black),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 2),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              width: 2,
-                              color: Color(0xffffbbda),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: ColorTheme.secondary,
-                            ),
-                          ),
-                          labelText: 'Username',
-                          prefixIcon: const Icon(Icons.person, color: Colors.black),
+          child: Consumer<MainProvider>(builder: (context, data, child) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(color: ColorTheme.primary),
+                    height: MediaQuery.of(context).size.height,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Spacer(),
+                        Image.asset(
+                          'assets/images/il_register.png',
+                          height: MediaQuery.of(context).size.height * 0.4,
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            _username = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorTheme.secondary,
-                          labelStyle: const TextStyle(height: 1, color: Colors.black),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 2),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              width: 2,
-                              color: Color(0xffffbbda),
+                        const Spacer(),
+                        TextField(
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorTheme.secondary,
+                            labelStyle: const TextStyle(height: 1, color: Colors.black),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 2),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color(0xffffbbda),
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: ColorTheme.secondary,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: ColorTheme.secondary,
+                              ),
                             ),
+                            labelText: 'Username',
+                            prefixIcon: const Icon(Icons.person, color: Colors.black),
                           ),
-                          labelText: 'Fullname',
-                          prefixIcon: const Icon(Icons.abc_rounded, color: Colors.black),
+                          onChanged: (value) {
+                            setState(() {
+                              _username = value;
+                            });
+                          },
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            _fullName = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorTheme.secondary,
-                          labelStyle: const TextStyle(height: 1, color: Colors.black),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 2),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              width: 2,
-                              color: Color(0xffffbbda),
+                        const SizedBox(height: 20),
+                        TextField(
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorTheme.secondary,
+                            labelStyle: const TextStyle(height: 1, color: Colors.black),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 2),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color(0xffffbbda),
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: ColorTheme.secondary,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: ColorTheme.secondary,
+                              ),
                             ),
+                            labelText: 'Fullname',
+                            prefixIcon: const Icon(Icons.abc_rounded, color: Colors.black),
                           ),
-                          labelText: 'Email',
-                          prefixIcon: const Icon(Icons.mail, color: Colors.black),
+                          onChanged: (value) {
+                            setState(() {
+                              _fullName = value;
+                            });
+                          },
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            _email = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        obscureText: secureTextEntry,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ColorTheme.secondary,
-                          labelStyle: const TextStyle(height: 1, color: Colors.black),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 2),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(
-                              width: 2,
-                              color: Color(0xffffbbda),
+                        const SizedBox(height: 20),
+                        TextField(
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorTheme.secondary,
+                            labelStyle: const TextStyle(height: 1, color: Colors.black),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 2),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color(0xffffbbda),
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(
-                              width: 2,
-                              color: ColorTheme.secondary,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: ColorTheme.secondary,
+                              ),
                             ),
+                            labelText: 'Email',
+                            prefixIcon: const Icon(Icons.mail, color: Colors.black),
                           ),
-                          labelText: 'Password',
-                          prefixIcon: const Icon(
-                            Icons.lock,
-                            color: Colors.black,
-                          ),
-                          suffixIconConstraints: const BoxConstraints(maxHeight: 20),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                secureTextEntry = !secureTextEntry;
-                              });
-                            },
-                            child: secureTextEntry
-                                ? Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: Image.asset(
-                                      'assets/images/icon_eye_disabled.png',
+                          onChanged: (value) {
+                            setState(() {
+                              _email = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        TextField(
+                          obscureText: secureTextEntry,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorTheme.secondary,
+                            labelStyle: const TextStyle(height: 1, color: Colors.black),
+                            contentPadding: const EdgeInsets.symmetric(vertical: 2),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: Color(0xffffbbda),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: BorderSide(
+                                width: 2,
+                                color: ColorTheme.secondary,
+                              ),
+                            ),
+                            labelText: 'Password',
+                            prefixIcon: const Icon(
+                              Icons.lock,
+                              color: Colors.black,
+                            ),
+                            suffixIconConstraints: const BoxConstraints(maxHeight: 20),
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  secureTextEntry = !secureTextEntry;
+                                });
+                              },
+                              child: secureTextEntry
+                                  ? Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Image.asset(
+                                        'assets/images/icon_eye_disabled.png',
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                                      child: Image.asset(
+                                        'assets/images/icon_eye.png',
+                                      ),
                                     ),
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    child: Image.asset(
-                                      'assets/images/icon_eye.png',
-                                    ),
-                                  ),
+                            ),
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              _password = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            data.register(_username, _email, _password, _fullName);
+                            context.goNamed(HomePage.routeName);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 3,
+                            backgroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            'Register',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        onChanged: (value) {
-                          setState(() {
-                            _password = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          print(_username);
-                          print(_email);
-                          print(_password);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 3,
-                          backgroundColor: Colors.black,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text(
-                          'Register',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 40),
-                    ],
+                        const SizedBox(height: 40),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );

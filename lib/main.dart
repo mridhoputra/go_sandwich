@@ -1,5 +1,7 @@
+import 'package:go_sandwich/provider/main_provider.dart';
 import 'package:go_sandwich/router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   runApp(const GoSandwich());
@@ -15,12 +17,15 @@ class GoSandwich extends StatefulWidget {
 class _GoSandwichState extends State<GoSandwich> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      title: 'Belajar Pencak Silat',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Lato',
+    return ChangeNotifierProvider(
+      create: (_) => MainProvider(),
+      child: MaterialApp.router(
+        routerConfig: router,
+        title: 'Go Sandwich',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Lato',
+        ),
       ),
     );
   }
