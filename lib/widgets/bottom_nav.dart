@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_sandwich/pages/cart/cart_page.dart';
 import 'package:go_sandwich/pages/home/home_page.dart';
-import 'package:go_sandwich/pages/login/login_page.dart';
 import 'package:go_sandwich/pages/profile/profile_page.dart';
 import 'package:go_sandwich/pages/search/search_page.dart';
 

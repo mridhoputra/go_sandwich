@@ -8,7 +8,7 @@ import 'package:go_sandwich/data/model/user.dart';
 class MainProvider extends ChangeNotifier {
   User _user = User();
   Cart _cart = Cart(items: [], totalPrice: 0);
-  Stock _stock = Stock(
+  final Stock _stock = Stock(
     items: [
       Item(
         product: Product(
