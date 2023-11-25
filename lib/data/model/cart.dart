@@ -52,4 +52,11 @@ class Cart {
     totalPrice =
         items?.fold<int>(0, (sum, item) => sum + (item.quantity * (item.product?.price ?? 0))) ?? 0;
   }
+
+  void removeItems(List<Item> itemsToRemove) {
+    if (items != null) {
+      items!.removeWhere((cartItem) => itemsToRemove.contains(cartItem));
+      updateTotalPrice();
+    }
+  }
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_sandwich/pages/home/home_page.dart';
 import 'package:go_sandwich/pages/login/login_page.dart';
 import 'package:go_sandwich/pages/stock/stock_page.dart';
 import 'package:go_sandwich/provider/main_provider.dart';
 import 'package:go_sandwich/utils/colors.dart';
+import 'package:go_sandwich/utils/navigation.dart';
+import 'package:go_sandwich/utils/show_alert.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,6 +20,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  void _confirmLogout(MainProvider mainProvider) async {
+    await showAlert(
+      context: context,
+      title: 'Alert',
+      onPressed: () {
+        Navigation.back();
+        mainProvider.logout();
+        context.goNamed(LoginPage.routeName);
+      },
+      showCancelButton: true,
+      content: 'Apakah anda yakin untuk logout?',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -214,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         InkWell(
                           onTap: () {
-                            context.goNamed(LoginPage.routeName);
+                            _confirmLogout(data);
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 12),

@@ -1,4 +1,6 @@
+import 'package:go_sandwich/data/model/cart.dart';
 import 'package:go_sandwich/data/model/item.dart';
+import 'package:go_sandwich/data/model/product.dart';
 
 class Stock {
   Stock({
@@ -6,6 +8,16 @@ class Stock {
   });
 
   List<Item>? items;
+
+  Item getStockItem(Product product) {
+    if (items != null) {
+      return items!.firstWhere(
+        (stockItem) => stockItem.product!.name == product.name,
+        orElse: () => Item(product: product, quantity: 0),
+      );
+    }
+    return Item(product: product, quantity: 0);
+  }
 
   bool canAddToCart(Item newItem) {
     if (items != null) {
@@ -35,22 +47,32 @@ class Stock {
     }
   }
 
-  void addOrUpdateStock(Item newItem) {
-    if (canAddToCart(newItem)) {
+  void updateStockQuantity(Product product, int newQuantity) {
+    if (items != null) {
       var stockItemIndex = items!.indexWhere(
-        (stockItem) => stockItem.product!.name == newItem.product!.name,
+        (stockItem) => stockItem.product!.name == product.name,
       );
 
       if (stockItemIndex != -1) {
-        // If the item already exists in stock, update the quantity
-        items![stockItemIndex].quantity -= newItem.quantity;
+        // If the product is found in the stock, update its quantity
+        items![stockItemIndex].quantity = newQuantity;
       } else {
-        // If the item doesn't exist in stock, add it
-        items!.add(Item(
-          product: newItem.product,
-          quantity: -newItem.quantity, // negative quantity to represent stock
-        ));
+        // If the product is not found, add a new item to the stock
+        items!.add(Item(product: product, quantity: newQuantity));
       }
     }
+  }
+
+  void subtractPurchasedQuantities(Cart selectedCart) {
+    selectedCart.items?.forEach((item) {
+      if (items != null) {
+        var stockItem = items!.firstWhere(
+          (stockItem) => stockItem.product!.name == item.product!.name,
+          orElse: () => Item(product: item.product, quantity: 0),
+        );
+
+        stockItem.quantity -= item.quantity;
+      }
+    });
   }
 }

@@ -74,6 +74,10 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Item getStockItem(Product product) {
+    return _stock.getStockItem(product);
+  }
+
   String addToCart(Item newItem) {
     if (_stock.canAddToCart(newItem)) {
       _cart.addItem(newItem);
@@ -98,5 +102,21 @@ class MainProvider extends ChangeNotifier {
     _cart.deleteItem(item);
     notifyListeners();
     return 'OK';
+  }
+
+  String checkoutItem(Cart selectedCart) {
+    try {
+      _stock.subtractPurchasedQuantities(selectedCart);
+      _cart.removeItems(selectedCart.items!);
+      notifyListeners();
+      return 'OK';
+    } catch (e) {
+      return 'Order gagal';
+    }
+  }
+
+  void updateStockItem(Product selectedProduct, int newQuantity) {
+    _stock.updateStockQuantity(selectedProduct, newQuantity);
+    notifyListeners();
   }
 }
