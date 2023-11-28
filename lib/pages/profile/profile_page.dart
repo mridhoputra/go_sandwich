@@ -196,19 +196,19 @@ class _ProfilePageState extends State<ProfilePage> {
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      Icons.inventory_2_rounded,
-                                      color: Colors.white,
-                                      size: 32,
+                                    Image.asset(
+                                      'assets/images/icon_stock.png',
+                                      height: 26,
+                                      width: 26,
                                     ),
-                                    SizedBox(width: 12),
-                                    Text(
+                                    const SizedBox(width: 12),
+                                    const Text(
                                       'Stok Barang',
                                       style: TextStyle(
                                         fontSize: 16,
@@ -218,7 +218,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ),
                                   ],
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.chevron_right,
                                   color: Colors.white,
                                   size: 24,
